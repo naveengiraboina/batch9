@@ -16,7 +16,7 @@ parallel 'integration': {
 		  //
      }
 }, 'quality': {
-     node ('Slave 1') {
+     node ('Slave1') {
           unstash 'source'
           withEnv(["PATH+MAVEN=${tool 'Maven3.3.3'}/bin"]) {
                sh "mvn clean package" //sonar:sonar
@@ -28,7 +28,7 @@ timeout(time: 7, unit: 'DAYS') {
      input message: 'Do you want to deploy?', submitter: 'admin'
 }
 stage name:'deploy', concurrency: 1
-node ('Slave 1') {
+node ('Slave1') {
      unstash 'source'
      withEnv(["PATH+MAVEN=${tool 'Maven3.3.3'}/bin"]) {
           sh "mvn clean package"
